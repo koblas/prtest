@@ -67,3 +67,4 @@ resource "aws_db_instance" "main" {
     Name = "${local.name}-db"
   })
 }
+

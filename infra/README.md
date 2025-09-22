@@ -129,3 +129,4 @@ aws rds describe-db-instances --db-instance-identifier todo-app-db
 3. Add monitoring and alerting
 4. Set up backup strategies
 5. Implement auto-scaling policies
+

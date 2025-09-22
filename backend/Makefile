@@ -37,3 +37,4 @@ setup: deps
 	@echo "Make sure PostgreSQL is running on localhost:5432"
 	@echo "Create a database named 'todos'"
 	@echo "Update .env file with your database credentials"
+

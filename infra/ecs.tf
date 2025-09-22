@@ -204,3 +204,4 @@ resource "aws_ecs_service" "main" {
 
   tags = local.common_tags
 }
+

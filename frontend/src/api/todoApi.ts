@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Todo, CreateTodoRequest, UpdateTodoRequest, TodoListResponse, ToggleCompletionRequest } from "../types/todo";
+import { Todo, CreateTodoRequest, UpdateTodoRequest, TodoListResponse } from "../types/todo";
 
 const api = axios.create({
   baseURL: "/api/v1",
@@ -52,4 +52,5 @@ export const todoApi = {
 };
 
 export default todoApi;
+
 

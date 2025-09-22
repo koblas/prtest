@@ -1,0 +1,73 @@
+version: "3.8"
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: todo-postgres-dev
+    environment:
+      POSTGRES_DB: todos
+      POSTGRES_USER: todos
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U todos -d todos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - todo-network
+
+  # Go Backend (Development with hot reload)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: todo-backend-dev
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=todos
+      - DB_PASSWORD=password
+      - DB_NAME=todos
+      - DB_SSLMODE=disable
+      - PORT=8080
+      - GIN_MODE=debug
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/vendor
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+  # React Frontend (Development with hot reload)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: todo-frontend-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    networks:
+      - todo-network
+    restart: unless-stopped
+
+volumes:
+  postgres_dev_data:
+
+networks:
+  todo-network:
+    driver: bridge

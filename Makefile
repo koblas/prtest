@@ -14,6 +14,7 @@ dev-down: ## Stop development environment
 
 # Production commands
 build: ## Build production images
+	cd frontend && npm run build
 	docker-compose build
 
 up: ## Start production environment
@@ -81,6 +82,10 @@ db-reset: ## Reset database (WARNING: This will delete all data)
 clean: ## Clean up build artifacts and containers
 	docker-compose down -v
 	docker system prune -f
+	cd backend && rm -rf bin/ tmp/
+	cd frontend && rm -rf dist/
+
+clean-build: ## Clean only build artifacts (keep containers)
 	cd backend && rm -rf bin/ tmp/
 	cd frontend && rm -rf dist/
 

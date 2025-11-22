@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Group, Text, Checkbox, ActionIcon, Stack, Badge } from "@mantine/core";
-import { IconTrash, IconEdit, IconCheck } from "@tabler/icons-react";
+import { IconTrash, IconEdit } from "@tabler/icons-react";
 import { Todo } from "../types/todo";
 import { useDeleteTodo, useToggleCompletion } from "../hooks/useTodos";
 
@@ -15,7 +15,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, onEdit }) => {
   const toggleCompletion = useToggleCompletion();
 
   const handleDelete = async () => {
-    if (window.confirm("Are you sure you want to delete this todo?")) {
+    if (typeof window !== "undefined" && window.confirm("Are you sure you want to delete this todo?")) {
       setIsDeleting(true);
       try {
         await deleteTodo.mutateAsync(todo.id);
@@ -35,7 +35,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({ todo, onEdit }) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder opacity={isDeleting ? 0.5 : 1}>
       <Group align="flex-start" gap="md">
-        <Checkbox checked={todo.completed} onChange={(event) => handleToggleCompletion()} size="md" color="green" />
+        <Checkbox checked={todo.completed} onChange={(_event) => handleToggleCompletion()} size="md" color="green" />
 
         <Stack gap="xs" style={{ flex: 1 }}>
           <Text size="lg" fw={500} td={todo.completed ? "line-through" : "none"} c={todo.completed ? "dimmed" : "dark"}>

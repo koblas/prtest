@@ -1,17 +1,5 @@
 import React, { useState } from "react";
-import {
-  Title,
-  Text,
-  Button,
-  Group,
-  Stack,
-  TextInput,
-  SegmentedControl,
-  Alert,
-  Skeleton,
-  Center,
-  Loader,
-} from "@mantine/core";
+import { Title, Text, Button, Group, Stack, TextInput, SegmentedControl, Alert, Skeleton, Center } from "@mantine/core";
 import { IconPlus, IconAlertCircle, IconSearch } from "@tabler/icons-react";
 import { Todo } from "../types/todo";
 import { useTodos } from "../hooks/useTodos";

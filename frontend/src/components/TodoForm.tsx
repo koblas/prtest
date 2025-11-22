@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "@mantine/form";
 import { Card, TextInput, Textarea, Button, Group, Stack, Title } from "@mantine/core";
-import { Todo, CreateTodoRequest } from "../types/todo";
+import { Todo } from "../types/todo";
 import { useCreateTodo, useUpdateTodo } from "../hooks/useTodos";
 
 interface TodoFormProps {
@@ -51,7 +51,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ todo, onCancel, onSuccess })
       }
       form.reset();
       onSuccess();
-    } catch (error) {
+    } catch {
       // Error handling is done in the hooks
     }
   };

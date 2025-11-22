@@ -31,10 +31,11 @@ export const useCreateTodo = () => {
         color: "green",
       });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       notifications.show({
         title: "Error",
-        message: error.response?.data?.message || "Failed to create todo",
+        message:
+          (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to create todo",
         color: "red",
       });
     },
@@ -55,10 +56,11 @@ export const useUpdateTodo = () => {
         color: "green",
       });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       notifications.show({
         title: "Error",
-        message: error.response?.data?.message || "Failed to update todo",
+        message:
+          (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to update todo",
         color: "red",
       });
     },
@@ -78,10 +80,11 @@ export const useDeleteTodo = () => {
         color: "green",
       });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       notifications.show({
         title: "Error",
-        message: error.response?.data?.message || "Failed to delete todo",
+        message:
+          (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to delete todo",
         color: "red",
       });
     },
@@ -102,10 +105,11 @@ export const useToggleCompletion = () => {
         color: "green",
       });
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       notifications.show({
         title: "Error",
-        message: error.response?.data?.message || "Failed to update todo",
+        message:
+          (error as { response?: { data?: { message?: string } } }).response?.data?.message || "Failed to update todo",
         color: "red",
       });
     },

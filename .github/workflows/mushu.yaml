@@ -1,0 +1,24 @@
+name: Test Mushu Pull request
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.25
+      #
+      - name: Display Go version
+        run: go install github.com/koblas/mushu@latest
+
+      - name: Dump env
+        run: env
+
+      - name: Run Mushu
+        run: mushu validate
